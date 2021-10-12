@@ -21,11 +21,17 @@ const defaultList = [
 export default function Home() {
   const [focusedItem, setFocusedItem] = useState(null); 
   const [todoList, setTodoList] = useState(defaultList);
+  const [isDetailsPaneOpen, setIsDetailsPaneOpen] = useState(false);
+
+  const toggleDetailsPane = () => {
+    setIsDetailsPaneOpen(!isDetailsPaneOpen);
+  }
 
   // get item to be updated
   const handleFocus = (e, id) => {
     e.preventDefault();
     setFocusedItem(todoList.find((item) => item.id === id));
+    toggleDetailsPane();
   }
 
   // set todo item status to "complete"
@@ -67,7 +73,7 @@ export default function Home() {
 
   return (
     <div className="grid min-h-screen bg-gray-700 text-gray-100">
-      <div className="grid grid-cols-[1fr,300px] mx-auto w-full">
+      <div className="grid grid-cols-[1fr,auto] mx-auto w-full">
         {/* todo list - main panel */}
         <div className="grid content-start gap-3 px-5 py-10 md:px-10">
           <h1 className="mb-2 text-3xl font-bold tracking-wide">Todo</h1>
@@ -77,15 +83,13 @@ export default function Home() {
             handleToggleComplete={handleToggleComplete}
             handleFocus={handleFocus}
           />
-          <TodoInput 
-            handleAdd={handleAdd}
-          />
+          <TodoInput handleAdd={handleAdd} />
         </div>
 
         {/* todo item detail - right side panel */}
-        <TodoDetails
-          todoItem={focusedItem}
-        />
+        { isDetailsPaneOpen && (
+          <TodoDetails todoItem={focusedItem} togglePane={toggleDetailsPane} />
+        )}
       </div>
     </div>
   )
