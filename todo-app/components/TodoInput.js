@@ -1,15 +1,15 @@
 import { useState } from "react";
 
 const TodoInput = ({ handleAdd }) => {
-  const [todoContent, setTodoContent] = useState(null);
+  const [content, setContent] = useState(null);
 
-  const handleChange = (e) => {
-    setTodoContent(e.target.value);
+  const handleInputChange = (e) => {
+    setContent(e.target.value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleAdd(todoContent)
+    handleAdd(content)
   }
 
   return ( 
@@ -22,6 +22,7 @@ const TodoInput = ({ handleAdd }) => {
         name="todo" 
         title="New todo item content."
         className="px-3 py-2 rounded"
+        onChange={handleInputChange}
       />
       <button 
         title="Add new todo item."

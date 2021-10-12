@@ -43,12 +43,14 @@ export default function Home() {
 
   // set todo item status to "deleted"
   const handleDelete = (id) => {
-    console.log('deleting', id);
-    const updatedList = [...todoList];
-    const updatedItem = updatedList.find((item) => item.id === id)
-    if (!updatedItem.isDeleted) {
-      updatedItem.isDeleted = true;
-      setTodoList(updatedList);
+    if (window.confirm('Are you sure you want to delete this item?')) {
+      console.log('deleting', id);
+      const updatedList = [...todoList];
+      const updatedItem = updatedList.find((item) => item.id === id)
+      if (!updatedItem.isDeleted) {
+        updatedItem.isDeleted = true;
+        setTodoList(updatedList);
+      }
     }
   }
 
@@ -67,7 +69,7 @@ export default function Home() {
 
   return (
     <div className="grid min-h-screen bg-gray-700 text-gray-100">
-      <div className="grid content-start gap-5 px-5 py-10 mx-auto w-full max-w-3xl">
+      <div className="grid content-start gap-2 px-5 py-10 mx-auto w-full max-w-3xl">
 
       <h1 className="text-3xl font-bold tracking-wide">Todo</h1>
       <TodoList
