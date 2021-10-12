@@ -69,9 +69,9 @@ export default function Home() {
 
   return (
     <div className="grid min-h-screen bg-gray-700 text-gray-100">
-      <div className="grid content-start gap-2 px-5 py-10 mx-auto w-full max-w-3xl">
+      <div className="grid content-start gap-3 mx-auto px-5 py-10 w-full max-w-3xl">
 
-      <h1 className="text-3xl font-bold tracking-wide">Todo</h1>
+      <h1 className="mb-2 text-3xl font-bold tracking-wide">Todo</h1>
       <TodoList
         todoList={todoList} 
         handleDelete={handleDelete}

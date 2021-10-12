@@ -8,13 +8,13 @@ const TodoItem = ({ item, handleToggleComplete, handleDelete, handleFocus }) => 
         title={!item.isComplete ? "Mark as complete" : "Mark as incomplete"}
         onClick={() => handleToggleComplete(item.id)}
         className={clsx(
-          "grid place-items-center p-2 w-10 h-full transition-all",
+          "grid place-items-center p-2 w-10 h-full transition-colors",
           !item.isComplete ? "text-transparent hover:text-gray-500" : "text-white hover:opacity-70"
         )}
       >
         <svg 
           className={clsx(
-            "w-5 h-5 p-[2px] border-2 border-gray-500 rounded-full transition-all",
+            "w-5 h-5 border-2 border-gray-500 rounded-full p-[2px] transition-colors",
             {"bg-gray-500": item.isComplete}
           )} 
           fill="none" 
@@ -33,10 +33,10 @@ const TodoItem = ({ item, handleToggleComplete, handleDelete, handleFocus }) => 
 
       {/* todo text */}
       <p 
-        title="Update item"
+        title="Update todo"
         className={clsx(
           "py-1 break-all cursor-pointer",
-          {"line-through text-gray-800/60": item.isComplete}
+          {"text-gray-800/60 line-through": item.isComplete}
         )}
         onClick={(e) => handleFocus(e, item)}
       >
@@ -45,9 +45,9 @@ const TodoItem = ({ item, handleToggleComplete, handleDelete, handleFocus }) => 
 
       {/* delete todo */}
       <button
-        title="Delete item"
+        title="Delete todo"
         onClick={() => handleDelete(item.id)}
-        className="grid place-items-center p-2 w-10 h-full rounded text-gray-500 transition-colors hover:bg-gray-200 hover:text-red-400"
+        className="grid place-items-center rounded p-2 w-10 h-full text-gray-500 transition-colors hover:bg-gray-200 hover:text-red-400"
       >
         <svg 
           className="w-5 h-5" 

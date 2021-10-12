@@ -29,7 +29,7 @@ const TodoInput = ({ handleAdd }) => {
     >
       {/* Add new todo */}
       <button 
-        title={isInputFocused && !isContentValid() ? "Cannot add empty todo" : "Add new todo item"}
+        title={isInputFocused && !isContentValid() ? "Cannot add empty todo" : "Add new todo"}
         className="w-10 h-full rounded p-2 transition-opacity disabled:opacity-20 disabled:cursor-not-allowed"
         disabled={isInputFocused && !isContentValid()}
       >
@@ -53,8 +53,8 @@ const TodoInput = ({ handleAdd }) => {
       <input 
         type="text" 
         name="todo" 
-        title={!isInputFocused ? "Add new todo item" : "New todo item content."}
-        placeholder="Add new item"
+        title={!isInputFocused ? "Add new todo" : "New todo content"}
+        placeholder="Add a todo"
         className="pr-3 pl-1 py-2 rounded bg-transparent text-white placeholder-gray-100 cursor-pointer focus:cursor-text focus:placeholder-opacity-0"
         ref={contentInput}
         onChange={handleInputChange}
