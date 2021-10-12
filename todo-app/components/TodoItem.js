@@ -8,13 +8,13 @@ const TodoItem = ({ item, handleToggleComplete, handleDelete, handleFocus }) => 
         title={!item.isComplete ? "Mark as complete" : "Mark as incomplete"}
         onClick={() => handleToggleComplete(item.id)}
         className={clsx(
-          "grid place-items-center p-2 w-10 h-full transition-colors",
+          "grid place-items-center p-2 w-10 h-full transition-colors duration-75",
           !item.isComplete ? "text-transparent hover:text-gray-500" : "text-white hover:opacity-70"
         )}
       >
         <svg 
           className={clsx(
-            "w-5 h-5 border-2 border-gray-500 rounded-full p-[2px] transition-colors",
+            "w-5 h-5 border-2 border-gray-500 rounded-full p-[2px] transition-colors duration-75",
             {"bg-gray-500": item.isComplete}
           )} 
           fill="none" 

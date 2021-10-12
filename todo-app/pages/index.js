@@ -27,7 +27,8 @@ export default function Home() {
   ]);
 
   // get item to be updated
-  const handleFocus = (id) => {
+  const handleFocus = (e, id) => {
+    e.preventDefault();
     const selectedItem = todoList.find((item) => item.id === id);
     setFocusedItem(selectedItem);
   }
