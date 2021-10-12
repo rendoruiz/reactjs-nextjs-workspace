@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import IconPlus from "./icons/IconPlus";
 
 const TodoInput = ({ handleAdd }) => {
   const [content, setContent] = useState('');
@@ -30,24 +31,11 @@ const TodoInput = ({ handleAdd }) => {
     >
       {/* Add new todo */}
       <button 
-        title={isInputFocused && !isContentValid() ? "Cannot add empty todo" : "Add new todo"}
         className="w-10 h-full rounded p-2 transition-opacity disabled:opacity-10 disabled:cursor-not-allowed"
+        title={isInputFocused && !isContentValid() ? "Cannot add empty todo" : "Add new todo"}
         disabled={isInputFocused && !isContentValid()}
       >
-        <svg 
-          className="w-6 h-6" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24" 
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth="2" 
-            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-          />
-        </svg>
+        <IconPlus className="w-6 h-6" />
       </button>
 
       {/* New todo content */}
