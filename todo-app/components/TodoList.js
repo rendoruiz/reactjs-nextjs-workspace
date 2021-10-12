@@ -1,15 +1,15 @@
 import TodoItem from "./TodoItem";
 
-const Todo = ({ todoList, handleDelete, handleComplete }) => {
+const Todo = ({ todoList, handleDelete, handleToggleComplete }) => {
   return ( 
     <div>
-      <ul className="rounded bg-gray-200 text-gray-700 overflow-hidden">
+      <ul className="grid gap-1">
         { [...todoList].map((item, index) => 
           <TodoItem 
             key={index} 
             item={item}
             handleDelete={handleDelete}
-            handleComplete={handleComplete}
+            handleToggleComplete={handleToggleComplete}
           />
         ) }
       </ul>

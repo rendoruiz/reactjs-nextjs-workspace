@@ -22,7 +22,6 @@ const TodoInput = ({ handleAdd }) => {
         name="todo" 
         title="New todo item content."
         className="px-3 py-2 rounded"
-        onChange={handleChange}
       />
       <button 
         title="Add new todo item."

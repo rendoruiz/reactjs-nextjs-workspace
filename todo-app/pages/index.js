@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Todo from "../components/Todo";
+import TodoList from "../components/TodoList";
 import TodoInput from "../components/TodoInput";
 
 export default function Home() {
@@ -33,14 +33,12 @@ export default function Home() {
   }
 
   // set todo item status to "complete"
-  const handleComplete = (id) => {
+  const handleToggleComplete = (id) => {
     console.log('completeing', id);
     const updatedList = [...todoList];
-    const updatedItem = updatedList.find((item) => item.id === id)
-    if (!updatedItem.isComplete) {
-      updatedItem.isComplete = true;
-      setTodoList(updatedList);
-    }
+    const updatedItem = updatedList.find((item) => item.id === id);
+    updatedItem.isComplete = !updatedItem.isComplete;
+    setTodoList(updatedList);
   }
 
   // set todo item status to "deleted"
@@ -68,17 +66,20 @@ export default function Home() {
   }
 
   return (
-    <div className="grid content-start gap-5 p-5 min-h-screen bg-gray-700 text-gray-100">
-      <h1>Todo</h1>
-      <Todo 
+    <div className="grid min-h-screen bg-gray-700 text-gray-100">
+      <div className="grid content-start gap-5 px-5 py-10 mx-auto w-full max-w-3xl">
+
+      <h1 className="text-3xl font-bold tracking-wide">Todo</h1>
+      <TodoList
         todoList={todoList} 
         handleDelete={handleDelete}
-        handleComplete={handleComplete}
+        handleToggleComplete={handleToggleComplete}
         handleFocus={handleFocus}
       />
       <TodoInput 
         handleAdd={handleAdd}
       />
+      </div>
     </div>
   )
 }
