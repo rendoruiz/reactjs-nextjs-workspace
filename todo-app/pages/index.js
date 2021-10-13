@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TodoList from "../components/TodoList";
 import TodoInput from "../components/TodoInput";
 import TodoDetails from "../components/TodoDetails";
@@ -19,7 +19,7 @@ const defaultList = [
 ];
 
 export default function Home() {
-  const [focusedItem, setFocusedItem] = useState(null); 
+  const [focusedItemId, setFocusedItemId] = useState(null); 
   const [todoList, setTodoList] = useState(defaultList);
   const [isDetailsPaneOpen, setIsDetailsPaneOpen] = useState(false);
 
@@ -27,15 +27,26 @@ export default function Home() {
     setIsDetailsPaneOpen(!isDetailsPaneOpen);
   }
 
-  // get item to be updated
-  const handleFocus = (e, id) => {
-    e.preventDefault();
-    setFocusedItem(todoList.find((item) => item.id === id));
-    toggleDetailsPane();
+  useEffect(() => {
+    console.log('index ue')
+    console.log(focusedItemId)
+  })
+
+  // set detail pane item
+  const handleFocus = (id) => {
+    if (focusedItemId) {
+      if (focusedItemId === id) {
+        toggleDetailsPane()
+      }
+    } else {
+      setIsDetailsPaneOpen(true);
+    }
+    setFocusedItemId(id);
+    
   }
 
-  // set todo item status to "complete"
-  const handleToggleComplete = (id) => {
+  // toggle todo item status between "complete" and "incomplete"
+  const toggleComplete = (id) => {
     console.log('completeing', id);
     const updatedList = [...todoList];
     const updatedItem = updatedList.find((item) => item.id === id);
@@ -44,7 +55,7 @@ export default function Home() {
   }
 
   // set todo item status to "deleted"
-  const handleDelete = (id) => {
+  const deleteItem = (id) => {
     if (window.confirm('Are you sure you want to delete this item?')) {
       console.log('deleting', id);
       const updatedList = [...todoList];
@@ -56,6 +67,7 @@ export default function Home() {
     }
   }
 
+  // add new todo entry
   const handleAdd = (content) => {
     console.log('adding');
     if (content.trim().length > 0) {
@@ -71,6 +83,13 @@ export default function Home() {
     }
   }
 
+  const updateItem = (todoItem) => {
+    if (todoItem.content.trim().length > 0) {
+      const tempList = todoList.map((item) => item.id === todoItem.id ? {...item, ...todoItem} : item);
+      setTodoList(tempList)
+    }
+  }
+
   return (
     <div className="grid min-h-screen bg-gray-700 text-gray-100">
       <div className="grid grid-cols-[1fr,auto] mx-auto w-full">
@@ -79,16 +98,21 @@ export default function Home() {
           <h1 className="mb-2 text-3xl font-bold tracking-wide">Todo</h1>
           <TodoList
             todoList={todoList} 
-            handleDelete={handleDelete}
-            handleToggleComplete={handleToggleComplete}
+            deleteItem={deleteItem}
+            toggleComplete={toggleComplete}
             handleFocus={handleFocus}
           />
           <TodoInput handleAdd={handleAdd} />
         </div>
 
         {/* todo item detail - right side panel */}
-        { isDetailsPaneOpen && (
-          <TodoDetails todoItem={focusedItem} togglePane={toggleDetailsPane} />
+        { isDetailsPaneOpen && focusedItemId && (
+          <TodoDetails 
+            todoItem={todoList.find(e => e.id === focusedItemId)} 
+            togglePane={toggleDetailsPane}
+            toggleComplete={toggleComplete}
+            updateItem={updateItem}
+          />
         )}
       </div>
     </div>

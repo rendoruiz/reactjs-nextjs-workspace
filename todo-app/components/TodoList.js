@@ -1,6 +1,6 @@
 import TodoItem from "./TodoItem";
 
-const Todo = ({ todoList, handleDelete, handleToggleComplete, handleFocus }) => {
+const Todo = ({ todoList, deleteItem, toggleComplete, handleFocus }) => {
   return ( 
     <div>
       <ul className="grid gap-1">
@@ -9,8 +9,8 @@ const Todo = ({ todoList, handleDelete, handleToggleComplete, handleFocus }) => 
             <TodoItem 
               key={index} 
               item={item}
-              handleDelete={handleDelete}
-              handleToggleComplete={handleToggleComplete}
+              deleteItem={deleteItem}
+              toggleComplete={toggleComplete}
               handleFocus={handleFocus}
             />
           )
