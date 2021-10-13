@@ -28,18 +28,15 @@ export default function Home() {
   }
 
   useEffect(() => {
-    console.log('index ue')
-    console.log(focusedItemId)
-  })
+    
+  }, [])
 
   // set detail pane item
   const handleFocus = (id) => {
-    if (focusedItemId) {
-      if (focusedItemId === id) {
-        toggleDetailsPane()
-      }
-    } else {
+    if (focusedItemId !== id) {
       setIsDetailsPaneOpen(true);
+    } else {
+      toggleDetailsPane();
     }
     setFocusedItemId(id);
     

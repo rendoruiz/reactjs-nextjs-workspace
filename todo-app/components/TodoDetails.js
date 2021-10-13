@@ -1,9 +1,11 @@
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { useEffect, useState } from 'react';
+import IconChevronRight from './icons/IconChevronRight';
 
 import ItemButtonComplete from "./itembuttons/ItemButtonComplete";
+import ItemButtonDelete from './itembuttons/ItemButtonDelete';
 
-const TodoDetails = ({ todoItem, togglePane, toggleComplete, updateItem }) => {
+const TodoDetails = ({ todoItem, togglePane, toggleComplete, updateItem, deleteItem }) => {
   const [content, setContent] = useState(todoItem.content)
 
   useEffect(() => {
@@ -22,8 +24,9 @@ const TodoDetails = ({ todoItem, togglePane, toggleComplete, updateItem }) => {
       <div className="absolute"></div>
 
       {/* side panel */}
-      <div className="px-2 py-10 bg-white text-gray-800">
-        <div className="flex overflow-auto">
+      <div className="grid grid-rows-[1fr,auto] items-start bg-white text-gray-800">
+        {/* complete toggle + content */}
+        <div className="flex px-2 pt-10 pb-2 overflow-auto">
           <ItemButtonComplete 
             isItemComplete={todoItem.isComplete}
             onClick={() => toggleComplete(todoItem.id)}
@@ -37,6 +40,23 @@ const TodoDetails = ({ todoItem, togglePane, toggleComplete, updateItem }) => {
           />
         </div>
 
+        {/* sidebar toggle + delete */}
+        <div className="flex justify-between items-center border-t-2 border-gray-200/60 p-1 bg-gray-100 text-gray-600">
+          {/* close details sidebar */}
+          <button 
+            className="grid place-items-center rounded w-10 h-10 transition-colors hover:bg-gray-300"
+            title="Hide details view"
+            onClick={togglePane}
+          >
+            <IconChevronRight />
+          </button>
+          
+          {/* delete item */}
+          <ItemButtonDelete 
+            className="grid place-items-center rounded w-10 h-10 text-red-600/80 transition-colors hover:bg-gray-300"
+            onClick={() => deleteItem(todoItem.id)}
+          />
+        </div>
       </div>
     </div>
   );

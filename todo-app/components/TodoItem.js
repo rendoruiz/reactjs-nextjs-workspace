@@ -15,7 +15,7 @@ const TodoItem = ({ item, toggleComplete, deleteItem, handleFocus }) => {
       <p 
         title="Update todo"
         className={clsx(
-          "py-1 break-all cursor-pointer",
+          "py-1 break-all cursor-pointer select-none",
           {"text-gray-800/60 line-through": item.isComplete}
         )}
         onClick={() => handleFocus(item.id)}
@@ -24,7 +24,10 @@ const TodoItem = ({ item, toggleComplete, deleteItem, handleFocus }) => {
       </p>
 
       {/* delete todo */}
-      <ItemButtonDelete onClick={() => deleteItem(item.id)} />
+      <ItemButtonDelete 
+        className="group-hover:opacity-100 grid place-items-center rounded p-2 w-10 h-full text-red-600/80 opacity-0 transition-all hover:bg-gray-300"
+        onClick={() => deleteItem(item.id)} 
+      />
     </li>
   );
 }
