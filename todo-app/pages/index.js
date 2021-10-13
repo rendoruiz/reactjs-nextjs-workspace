@@ -109,6 +109,7 @@ export default function Home() {
             togglePane={toggleDetailsPane}
             toggleComplete={toggleComplete}
             updateItem={updateItem}
+            deleteItem={deleteItem}
           />
         )}
       </div>
