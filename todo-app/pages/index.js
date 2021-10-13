@@ -60,6 +60,9 @@ export default function Home() {
       if (!updatedItem.isDeleted) {
         updatedItem.isDeleted = true;
         setTodoList(updatedList);
+
+        // update focused item
+        setFocusedItemId(null);
       }
     }
   }
